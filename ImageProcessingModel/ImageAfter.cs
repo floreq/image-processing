@@ -12,25 +12,42 @@ namespace ImageProcessing.Model
         public ImageAfter ConvertToGreyscale()
         {
             var image = ProcessedImage;
+
             BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * image.Height];
-            var imageBytesLenght = imageBytes.Length;
-            IntPtr scan0 = imageData.Scan0;
+            IntPtr scan0 = imageData.Scan0; // First pixel adress
 
-            Marshal.Copy(scan0, imageBytes, 0, imageBytesLenght);
+            int bytesPerPixel = 3;
 
-            for (int i = 3; i < imageBytesLenght; i += 3)
+            // Image colors (BGR not RGB)
+            byte[] imageDataBytes = new byte[Math.Abs(imageData.Stride) * imageData.Height];
+            var imageDataBytesLenght = imageDataBytes.Length;
+            var imageDataBytesWidth = Math.Abs(imageData.Stride);
+
+            Marshal.Copy(scan0, imageDataBytes, 0, imageDataBytesLenght);
+
+            int width = 3;
+            int i = 3;
+            while (i < imageDataBytesLenght)
             {
-                byte pixelB = imageBytes[i - 3];
-                byte pixelR = imageBytes[i - 1];
-                byte pixelG = imageBytes[i - 2];
+                byte pixelB = imageDataBytes[i - 3];
+                byte pixelR = imageDataBytes[i - 1];
+                byte pixelG = imageDataBytes[i - 2];
 
                 byte intensityWeight = Convert.ToByte(0.299 * pixelR + 0.587 * pixelG + 0.114 * pixelB);
 
-                imageBytes[i - 3] = imageBytes[i - 1] = imageBytes[i - 2] = intensityWeight;
+                imageDataBytes[i - 3] = imageDataBytes[i - 1] = imageDataBytes[i - 2] = intensityWeight;
+
+                if (width >= imageDataBytesWidth)
+                {
+                    i += imageDataBytesWidth - width;
+                    width = 0;
+                    continue;
+                }
+                i += bytesPerPixel;
+                width += bytesPerPixel;
             }
 
-            Marshal.Copy(imageBytes, 0, scan0, imageBytesLenght);
+            Marshal.Copy(imageDataBytes, 0, scan0, imageDataBytesLenght);
             image.UnlockBits(imageData);
 
             return this;
@@ -77,59 +94,69 @@ namespace ImageProcessing.Model
 
             return this;
         }
-
-        public ImageAfter AddLinearGradient(Point start, Point end)
+        public ImageAfter AddLinearGradient(Point start, Point end, Size relativeSize)
         {
             var image = ProcessedImage;
+
             BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            byte[] imageBytes = new byte[Math.Abs(imageData.Stride) * image.Height];
-            var imageBytesLenght = imageBytes.Length;
-            var imageBytesWidth = Math.Abs(imageData.Stride);
-            IntPtr scan0 = imageData.Scan0;
+            IntPtr scan0 = imageData.Scan0; // First pixel adress
 
-            Marshal.Copy(scan0, imageBytes, 0, imageBytesLenght);
+            int bytesPerPixel = 3;
 
-            Debug.WriteLine("Start: {0}, End: {1}", start, end);
+            // Image colors (BGR not RGB)
+            byte[] imageDataBytes = new byte[Math.Abs(imageData.Stride) * imageData.Height];
+            var imageDataBytesLenght = imageDataBytes.Length;
+            var imageDataBytesWidth = Math.Abs(imageData.Stride);
 
-            int width = 0;
+            Marshal.Copy(scan0, imageDataBytes, 0, imageDataBytesLenght);
+
+            double scaleForX = Convert.ToDouble(image.Width) / Convert.ToDouble(relativeSize.Width);
+            double scaledWidth = scaleForX * relativeSize.Width;
+            var scaleHeight = image.Height / relativeSize.Height;
+
+            int width = 3;
             int height = 0;
+            double gradientWidthLimit = start.X * scaleForX * bytesPerPixel;
+            double gradientHeightLimit = 100 * bytesPerPixel;
 
-            //if (start.X == end.X)
-            //{
-            //    gradientLimit = start.X;
-            //}
+            if (start.X == end.X)
+            {
+            }
             //if (start.Y == end.Y)
             //{
             //}
 
-            double x1 = 3440;
-            double y1 = 0;
-            double x2 = 0;
-            double y2 = 2752;
+            var w = image.Width * bytesPerPixel;
 
-            double a = (y2 - y1) / (x2 - x1);
-            double b = y1 - a * x1;
-            double gradientLimit = Math.Abs((height - b) / a) * 3;
-
-            for (int i = 3; i < imageBytesLenght; i += 3, width += 3)
+            int i = 3;
+            while (i < imageDataBytesLenght)
             {
-                byte pixelB = imageBytes[i - 3];
-                byte pixelR = imageBytes[i - 1];
-                byte pixelG = imageBytes[i - 2];
+                byte pixelB = imageDataBytes[i - 3];
+                byte pixelR = imageDataBytes[i - 1];
+                byte pixelG = imageDataBytes[i - 2];
 
-                imageBytes[i - 3] = imageBytes[i - 1] = imageBytes[i - 2] = 0;
+                imageDataBytes[i - 3] = 255;
+                imageDataBytes[i - 1] = 0;
+                imageDataBytes[i - 2] = 0;
 
-                if (width >= gradientLimit)
+                if (width >= gradientWidthLimit)
                 {
-                    i += imageBytesWidth - width;
+                    i += imageDataBytesWidth - width;
                     width = 0;
+
                     height++;
-                    gradientLimit = Math.Abs((height - b) / a) * 3;
+                    if (height >= gradientHeightLimit)
+                    {
+                        break;
+                    }
+
                     continue;
                 }
+                i += bytesPerPixel;
+                width += bytesPerPixel;
             }
 
-            Marshal.Copy(imageBytes, 0, scan0, imageBytesLenght);
+            Marshal.Copy(imageDataBytes, 0, scan0, imageDataBytesLenght);
             image.UnlockBits(imageData);
 
             return this;

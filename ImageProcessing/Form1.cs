@@ -86,6 +86,7 @@ namespace ImageProcessing
         bool toogleClicks = true;
         private void pictureBoxBefore_MouseClick(object sender, MouseEventArgs e)
         {
+            var clientSize = pictureBoxBefore.ClientSize;
             if (checkBoxLinearGradient.Checked)
             {
                 if (toogleClicks)
@@ -97,10 +98,14 @@ namespace ImageProcessing
                 {
                     mouseClicks[1] = e.Location;
                     toogleClicks = true;
-                    ip.AddLinearGradient(mouseClicks[0], mouseClicks[1]);
+                    ip.AddLinearGradient(mouseClicks[0], mouseClicks[1], clientSize);
                     UpdatePictureBoxAfter();
                 }
             }
-        }  
+        }
+
+        private void buttonHorizontalGradient_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

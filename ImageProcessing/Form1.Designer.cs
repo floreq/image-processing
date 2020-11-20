@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.checkBoxLinearGradient = new System.Windows.Forms.CheckBox();
             this.numericUpDownContrast = new System.Windows.Forms.NumericUpDown();
             this.checkBoxAdjustContrast = new System.Windows.Forms.CheckBox();
             this.checkBoxGrayScale = new System.Windows.Forms.CheckBox();
@@ -38,7 +39,7 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
-            this.checkBoxLinearGradient = new System.Windows.Forms.CheckBox();
+            this.buttonHorizontalGradient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.buttonHorizontalGradient);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxLinearGradient);
             this.splitContainerAplication.Panel1.Controls.Add(this.numericUpDownContrast);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxAdjustContrast);
@@ -73,6 +75,16 @@
             this.splitContainerAplication.SplitterDistance = 373;
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
+            // 
+            // checkBoxLinearGradient
+            // 
+            this.checkBoxLinearGradient.AutoSize = true;
+            this.checkBoxLinearGradient.Location = new System.Drawing.Point(12, 83);
+            this.checkBoxLinearGradient.Name = "checkBoxLinearGradient";
+            this.checkBoxLinearGradient.Size = new System.Drawing.Size(106, 19);
+            this.checkBoxLinearGradient.TabIndex = 4;
+            this.checkBoxLinearGradient.Text = "Linear Gradient";
+            this.checkBoxLinearGradient.UseVisualStyleBackColor = true;
             // 
             // numericUpDownContrast
             // 
@@ -180,15 +192,15 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
-            // checkBoxLinearGradient
+            // buttonHorizontalGradient
             // 
-            this.checkBoxLinearGradient.AutoSize = true;
-            this.checkBoxLinearGradient.Location = new System.Drawing.Point(12, 83);
-            this.checkBoxLinearGradient.Name = "checkBoxLinearGradient";
-            this.checkBoxLinearGradient.Size = new System.Drawing.Size(106, 19);
-            this.checkBoxLinearGradient.TabIndex = 4;
-            this.checkBoxLinearGradient.Text = "Linear Gradient";
-            this.checkBoxLinearGradient.UseVisualStyleBackColor = true;
+            this.buttonHorizontalGradient.Location = new System.Drawing.Point(124, 85);
+            this.buttonHorizontalGradient.Name = "buttonHorizontalGradient";
+            this.buttonHorizontalGradient.Size = new System.Drawing.Size(75, 23);
+            this.buttonHorizontalGradient.TabIndex = 1;
+            this.buttonHorizontalGradient.Text = "Horizontal Gradient";
+            this.buttonHorizontalGradient.UseVisualStyleBackColor = true;
+            this.buttonHorizontalGradient.Click += new System.EventHandler(this.buttonHorizontalGradient_Click);
             // 
             // Form1
             // 
@@ -229,6 +241,7 @@
         private System.Windows.Forms.CheckBox checkBoxAdjustContrast;
         private System.Windows.Forms.NumericUpDown numericUpDownContrast;
         private System.Windows.Forms.CheckBox checkBoxLinearGradient;
+        private System.Windows.Forms.Button buttonHorizontalGradient;
     }
 }
 
