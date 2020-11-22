@@ -19,7 +19,6 @@ namespace ImageProcessing.Model
             byte* scan0 = (byte*)imageData.Scan0.ToPointer();
             byte* scan1 = (byte*)imageData.Scan0.ToPointer();
             int stride = imageData.Stride;
-            int bytesPerPixel = 3;
             int NumRow = image.Height;
             int numCol = image.Width;
             for (int i = 0; i < NumRow; i = i + 1)

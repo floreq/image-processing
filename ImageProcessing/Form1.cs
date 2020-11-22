@@ -24,6 +24,7 @@ namespace ImageProcessing
             al = new AlgorithmLbph();
             numericUpDownContrast.Enabled = false;
             numericUpDownRadius.Enabled = false;
+            buttonStartAlgorithmLbph.Enabled = false;
         }
         private void EnableCheckBoxes(bool isEnable)
         {
@@ -113,22 +114,20 @@ namespace ImageProcessing
         {
             if (checkBoxAlgorithmLbph.Checked)
             {
-                int radiusValue = Convert.ToInt32(numericUpDownRadius.Value);
-                al.Lbph(radiusValue);
-                UpdatePictureBoxAfter();
+                numericUpDownRadius.Enabled = true;
+                buttonStartAlgorithmLbph.Enabled = true;
+            } else
+            {
+                numericUpDownRadius.Enabled = false;
+                buttonStartAlgorithmLbph.Enabled = false;
             }
         }
 
-        private void numericUpDownRadius_ValueChanged(object sender, EventArgs e)
+        private void buttonStartAlgorithmLbph_Click(object sender, EventArgs e)
         {
-            if (checkBoxAlgorithmLbph.Checked)
-            {
-                numericUpDownRadius.Enabled = true;
-            }
-            else
-            {
-                numericUpDownRadius.Enabled = false;
-            }
+            int radiusValue = Convert.ToInt32(numericUpDownRadius.Value);
+            al.Lbph(radiusValue);
+            UpdatePictureBoxAfter();
         }
     }
 }

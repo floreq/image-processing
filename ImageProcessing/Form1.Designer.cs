@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.buttonStartAlgorithmLbph = new System.Windows.Forms.Button();
             this.numericUpDownRadius = new System.Windows.Forms.NumericUpDown();
             this.checkBoxAlgorithmLbph = new System.Windows.Forms.CheckBox();
             this.checkBoxLinearGradient = new System.Windows.Forms.CheckBox();
@@ -63,6 +64,7 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.buttonStartAlgorithmLbph);
             this.splitContainerAplication.Panel1.Controls.Add(this.numericUpDownRadius);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxAlgorithmLbph);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxLinearGradient);
@@ -79,16 +81,26 @@
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
             // 
+            // buttonStartAlgorithmLbph
+            // 
+            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(252, 108);
+            this.buttonStartAlgorithmLbph.Name = "buttonStartAlgorithmLbph";
+            this.buttonStartAlgorithmLbph.Size = new System.Drawing.Size(44, 23);
+            this.buttonStartAlgorithmLbph.TabIndex = 7;
+            this.buttonStartAlgorithmLbph.Text = "Start";
+            this.buttonStartAlgorithmLbph.UseVisualStyleBackColor = true;
+            this.buttonStartAlgorithmLbph.Click += new System.EventHandler(this.buttonStartAlgorithmLbph_Click);
+            // 
             // numericUpDownRadius
             // 
             this.numericUpDownRadius.Location = new System.Drawing.Point(126, 108);
             this.numericUpDownRadius.Maximum = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
             this.numericUpDownRadius.Minimum = new decimal(new int[] {
-            3,
+            1,
             0,
             0,
             0});
@@ -101,7 +113,6 @@
             0,
             0,
             0});
-            this.numericUpDownRadius.ValueChanged += new System.EventHandler(this.numericUpDownRadius_ValueChanged);
             // 
             // checkBoxAlgorithmLbph
             // 
@@ -272,6 +283,7 @@
         private System.Windows.Forms.CheckBox checkBoxLinearGradient;
         private System.Windows.Forms.CheckBox checkBoxAlgorithmLbph;
         private System.Windows.Forms.NumericUpDown numericUpDownRadius;
+        private System.Windows.Forms.Button buttonStartAlgorithmLbph;
     }
 }
 
