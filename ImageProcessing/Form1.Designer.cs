@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.numericUpDownRadius = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxAlgorithmLbph = new System.Windows.Forms.CheckBox();
             this.checkBoxLinearGradient = new System.Windows.Forms.CheckBox();
             this.numericUpDownContrast = new System.Windows.Forms.NumericUpDown();
             this.checkBoxAdjustContrast = new System.Windows.Forms.CheckBox();
@@ -39,11 +41,11 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
-            this.buttonHorizontalGradient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
             this.splitContainerAplication.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerImages)).BeginInit();
             this.splitContainerImages.Panel1.SuspendLayout();
@@ -61,7 +63,8 @@
             // 
             // splitContainerAplication.Panel1
             // 
-            this.splitContainerAplication.Panel1.Controls.Add(this.buttonHorizontalGradient);
+            this.splitContainerAplication.Panel1.Controls.Add(this.numericUpDownRadius);
+            this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxAlgorithmLbph);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxLinearGradient);
             this.splitContainerAplication.Panel1.Controls.Add(this.numericUpDownContrast);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxAdjustContrast);
@@ -75,6 +78,41 @@
             this.splitContainerAplication.SplitterDistance = 373;
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
+            // 
+            // numericUpDownRadius
+            // 
+            this.numericUpDownRadius.Location = new System.Drawing.Point(126, 108);
+            this.numericUpDownRadius.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDownRadius.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownRadius.Name = "numericUpDownRadius";
+            this.numericUpDownRadius.Size = new System.Drawing.Size(120, 23);
+            this.numericUpDownRadius.TabIndex = 6;
+            this.numericUpDownRadius.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.numericUpDownRadius.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownRadius.ValueChanged += new System.EventHandler(this.numericUpDownRadius_ValueChanged);
+            // 
+            // checkBoxAlgorithmLbph
+            // 
+            this.checkBoxAlgorithmLbph.AutoSize = true;
+            this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(12, 109);
+            this.checkBoxAlgorithmLbph.Name = "checkBoxAlgorithmLbph";
+            this.checkBoxAlgorithmLbph.Size = new System.Drawing.Size(112, 19);
+            this.checkBoxAlgorithmLbph.TabIndex = 5;
+            this.checkBoxAlgorithmLbph.Text = "Algorithm LBPH";
+            this.checkBoxAlgorithmLbph.UseVisualStyleBackColor = true;
+            this.checkBoxAlgorithmLbph.CheckedChanged += new System.EventHandler(this.checkBoxAlgorithmLbph_CheckedChanged);
             // 
             // checkBoxLinearGradient
             // 
@@ -192,16 +230,6 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
-            // buttonHorizontalGradient
-            // 
-            this.buttonHorizontalGradient.Location = new System.Drawing.Point(124, 85);
-            this.buttonHorizontalGradient.Name = "buttonHorizontalGradient";
-            this.buttonHorizontalGradient.Size = new System.Drawing.Size(75, 23);
-            this.buttonHorizontalGradient.TabIndex = 1;
-            this.buttonHorizontalGradient.Text = "Horizontal Gradient";
-            this.buttonHorizontalGradient.UseVisualStyleBackColor = true;
-            this.buttonHorizontalGradient.Click += new System.EventHandler(this.buttonHorizontalGradient_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -215,6 +243,7 @@
             this.splitContainerAplication.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).EndInit();
             this.splitContainerAplication.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).EndInit();
             this.splitContainerImages.Panel1.ResumeLayout(false);
             this.splitContainerImages.Panel1.PerformLayout();
@@ -241,7 +270,8 @@
         private System.Windows.Forms.CheckBox checkBoxAdjustContrast;
         private System.Windows.Forms.NumericUpDown numericUpDownContrast;
         private System.Windows.Forms.CheckBox checkBoxLinearGradient;
-        private System.Windows.Forms.Button buttonHorizontalGradient;
+        private System.Windows.Forms.CheckBox checkBoxAlgorithmLbph;
+        private System.Windows.Forms.NumericUpDown numericUpDownRadius;
     }
 }
 

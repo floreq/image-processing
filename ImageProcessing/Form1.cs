@@ -14,25 +14,29 @@ namespace ImageProcessing
 {
     public partial class Form1 : Form
     {
-        ImageAfter ip;
+        ImageAdjustment ia;
+        AlgorithmLbph al;
         public Form1()
         {
             InitializeComponent();
             EnableCheckBoxes(false);
-            ip = new ImageAfter();
+            ia = new ImageAdjustment();
+            al = new AlgorithmLbph();
             numericUpDownContrast.Enabled = false;
+            numericUpDownRadius.Enabled = false;
         }
         private void EnableCheckBoxes(bool isEnable)
         {
             checkBoxGrayScale.Enabled = isEnable;
             checkBoxAdjustContrast.Enabled = isEnable;
             checkBoxLinearGradient.Enabled = isEnable;
+            checkBoxAlgorithmLbph.Enabled = isEnable;
         }
 
         private void UpdatePictureBoxAfter()
         {
-            pictureBoxAfter.Image = ip.ProcessedImage;
-            ip.SaveProcessedImageToFile("processed-image.jpg");
+            pictureBoxAfter.Image = ia.ProcessedImage;
+            ia.SaveProcessedImageToFile("processed-image.jpg");
         }
 
         private void addImage_Click(object sender, EventArgs e)
@@ -46,7 +50,8 @@ namespace ImageProcessing
                     pictureBoxBefore.Image = imageBefore;
                     pictureBoxAfter.Image = imageAfter;
 
-                    ip.ProcessedImage = imageAfter;
+                    ia.ProcessedImage = imageAfter;
+                    al.ProcessedImage = imageAfter;
 
                     EnableCheckBoxes(true);
                 }
@@ -57,7 +62,7 @@ namespace ImageProcessing
         {
             if (checkBoxGrayScale.Checked)
             {
-                ip.ConvertToGreyscale();
+                ia.ConvertToGreyscale();
                 UpdatePictureBoxAfter();
             }
         }
@@ -77,7 +82,7 @@ namespace ImageProcessing
         private void numericUpDownContrast_ValueChanged(object sender, EventArgs e)
         {
             int contrastValue = Convert.ToInt32(numericUpDownContrast.Value);
-            ip.AdjustContrast(contrastValue);
+            ia.AdjustContrast(contrastValue);
 
             UpdatePictureBoxAfter();
         }
@@ -98,14 +103,32 @@ namespace ImageProcessing
                 {
                     mouseClicks[1] = e.Location;
                     toogleClicks = true;
-                    ip.AddLinearGradient(mouseClicks[0], mouseClicks[1], clientSize);
+                    ia.AddLinearGradient(mouseClicks[0], mouseClicks[1], clientSize);
                     UpdatePictureBoxAfter();
                 }
             }
         }
 
-        private void buttonHorizontalGradient_Click(object sender, EventArgs e)
+        private void checkBoxAlgorithmLbph_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBoxAlgorithmLbph.Checked)
+            {
+                int radiusValue = Convert.ToInt32(numericUpDownRadius.Value);
+                al.Lbph(radiusValue);
+                UpdatePictureBoxAfter();
+            }
+        }
+
+        private void numericUpDownRadius_ValueChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAlgorithmLbph.Checked)
+            {
+                numericUpDownRadius.Enabled = true;
+            }
+            else
+            {
+                numericUpDownRadius.Enabled = false;
+            }
         }
     }
 }
