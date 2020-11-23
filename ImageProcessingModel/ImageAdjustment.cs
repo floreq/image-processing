@@ -96,6 +96,14 @@ namespace ImageProcessing.Model
         {
             var image = ProcessedImage;
 
+            double imageAspectRatio = Convert.ToDouble(image.Width) / Convert.ToDouble(image.Height);
+            int relativeImageHeight = Convert.ToInt32(relativeSize.Width / imageAspectRatio);
+
+            int deltaY = (relativeSize.Height - relativeImageHeight) / 2;
+
+            double scaleForX = Convert.ToDouble(image.Width) / Convert.ToDouble(relativeSize.Width);
+            double scaleForY = Convert.ToDouble(image.Height) / Convert.ToDouble(relativeImageHeight);
+
             BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             IntPtr scan0 = imageData.Scan0; // First pixel adress
 
@@ -106,14 +114,19 @@ namespace ImageProcessing.Model
 
             Marshal.Copy(scan0, imageDataBytes, 0, imageDataBytesLenght);
 
-            double scaleForX = Convert.ToDouble(image.Width) / Convert.ToDouble(relativeSize.Width);
-            double scaledWidth = scaleForX * relativeSize.Width;
-            var scaleHeight = image.Height / relativeSize.Height;
-
             int width = 3;
             int height = 0;
-            double gradientWidthLimit = start.X * scaleForX * bytesPerPixel;
-            double gradientHeightLimit = 100 * bytesPerPixel;
+
+            double x1 = start.X * scaleForX; 
+            double y1 = (start.Y - deltaY) * scaleForY;
+            double x2 = end.X * scaleForX; 
+            double y2 = (end.Y - deltaY) * scaleForY; 
+
+            double a = (y2 - y1) / (x2 - x1);
+            double b = y1 - a * x1;
+
+            double gradientWidthLimit = Math.Abs((height - b) / a) * bytesPerPixel;
+            double gradientHeightLimit = (end.Y - deltaY) * scaleForY;
 
             if (start.X == end.X)
             {
@@ -121,8 +134,6 @@ namespace ImageProcessing.Model
             //if (start.Y == end.Y)
             //{
             //}
-
-            var w = image.Width * bytesPerPixel;
 
             int i = 3;
             while (i < imageDataBytesLenght)
@@ -139,6 +150,7 @@ namespace ImageProcessing.Model
                 {
                     i += imageDataBytesWidth - width;
                     width = 0;
+                    gradientWidthLimit = Math.Abs((height - b) / a) * bytesPerPixel;
 
                     height++;
                     if (height >= gradientHeightLimit)
