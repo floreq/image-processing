@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yGs6XcT6HmwNyN2TRSP5V6nL4e6M+I3sCYKkoVuUicqFOwcB1ecQvH65opuzVSLgas4L6L6JCQNr4KUUbX3ICw==",
+  "dgSpecHash": "bVucRpyoH2lxIK0lfmGJhMAOINxsLJDf9M4okOOslrpwKJ0KL/LeZ1mgZ/YsJjmMitVy0rhsavDhvfSkJ5K8+Q==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\image-processing\\ImageProcessingModel\\ImageProcessing.Model.csproj",
+  "projectFilePath": "C:\\Users\\piotr\\OneDrive\\Dokumenty\\GitHub\\image-processing\\ImageProcessingModel\\ImageProcessing.Model.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Raviol\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Raviol\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\Raviol\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
+    "C:\\Users\\piotr\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\piotr\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\piotr\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

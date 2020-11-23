@@ -17,8 +17,8 @@ namespace ImageProcessing
     {
         ImageAdjustment ia;
         AlgorithmLbph al;
-        Bitmap ImageCompare1 = null;
-        Bitmap ImageCompare2 = null;
+        Bitmap ImageCompare1;
+        Bitmap ImageCompare2;
         public Form1()
         {
             InitializeComponent();
@@ -132,11 +132,6 @@ namespace ImageProcessing
             UpdatePictureBoxAfter();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ImageComparison_CheckedChanged(object sender, EventArgs e)
         {
             if (ImageComparison.Checked)
@@ -160,8 +155,6 @@ namespace ImageProcessing
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ImageCompare1 = (Bitmap)Image.FromFile(ofd.FileName);
-
-                    EnableCheckBoxes(true);
                 }
                 StartComparisonCheck();
             }
@@ -181,8 +174,6 @@ namespace ImageProcessing
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ImageCompare2 = (Bitmap)Image.FromFile(ofd.FileName);
-
-                    EnableCheckBoxes(true);
                 }
                 StartComparisonCheck();
             }
