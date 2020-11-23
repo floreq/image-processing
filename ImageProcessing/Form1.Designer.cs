@@ -83,7 +83,8 @@
             // 
             // buttonStartAlgorithmLbph
             // 
-            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(252, 108);
+            this.buttonStartAlgorithmLbph.Enabled = false;
+            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(252, 106);
             this.buttonStartAlgorithmLbph.Name = "buttonStartAlgorithmLbph";
             this.buttonStartAlgorithmLbph.Size = new System.Drawing.Size(44, 23);
             this.buttonStartAlgorithmLbph.TabIndex = 7;
@@ -93,7 +94,8 @@
             // 
             // numericUpDownRadius
             // 
-            this.numericUpDownRadius.Location = new System.Drawing.Point(126, 108);
+            this.numericUpDownRadius.Enabled = false;
+            this.numericUpDownRadius.Location = new System.Drawing.Point(126, 107);
             this.numericUpDownRadius.Maximum = new decimal(new int[] {
             10,
             0,
@@ -117,6 +119,7 @@
             // checkBoxAlgorithmLbph
             // 
             this.checkBoxAlgorithmLbph.AutoSize = true;
+            this.checkBoxAlgorithmLbph.Enabled = false;
             this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(12, 109);
             this.checkBoxAlgorithmLbph.Name = "checkBoxAlgorithmLbph";
             this.checkBoxAlgorithmLbph.Size = new System.Drawing.Size(112, 19);
@@ -128,6 +131,7 @@
             // checkBoxLinearGradient
             // 
             this.checkBoxLinearGradient.AutoSize = true;
+            this.checkBoxLinearGradient.Enabled = false;
             this.checkBoxLinearGradient.Location = new System.Drawing.Point(12, 83);
             this.checkBoxLinearGradient.Name = "checkBoxLinearGradient";
             this.checkBoxLinearGradient.Size = new System.Drawing.Size(106, 19);
@@ -137,6 +141,7 @@
             // 
             // numericUpDownContrast
             // 
+            this.numericUpDownContrast.Enabled = false;
             this.numericUpDownContrast.Location = new System.Drawing.Point(126, 56);
             this.numericUpDownContrast.Minimum = new decimal(new int[] {
             100,
@@ -152,6 +157,7 @@
             // checkBoxAdjustContrast
             // 
             this.checkBoxAdjustContrast.AutoSize = true;
+            this.checkBoxAdjustContrast.Enabled = false;
             this.checkBoxAdjustContrast.Location = new System.Drawing.Point(12, 57);
             this.checkBoxAdjustContrast.Name = "checkBoxAdjustContrast";
             this.checkBoxAdjustContrast.Size = new System.Drawing.Size(108, 19);
@@ -163,6 +169,7 @@
             // checkBoxGrayScale
             // 
             this.checkBoxGrayScale.AutoSize = true;
+            this.checkBoxGrayScale.Enabled = false;
             this.checkBoxGrayScale.Location = new System.Drawing.Point(12, 32);
             this.checkBoxGrayScale.Name = "checkBoxGrayScale";
             this.checkBoxGrayScale.Size = new System.Drawing.Size(80, 19);

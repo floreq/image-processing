@@ -19,12 +19,8 @@ namespace ImageProcessing
         public Form1()
         {
             InitializeComponent();
-            EnableCheckBoxes(false);
             ia = new ImageAdjustment();
             al = new AlgorithmLbph();
-            numericUpDownContrast.Enabled = false;
-            numericUpDownRadius.Enabled = false;
-            buttonStartAlgorithmLbph.Enabled = false;
         }
         private void EnableCheckBoxes(bool isEnable)
         {
@@ -39,7 +35,6 @@ namespace ImageProcessing
             pictureBoxAfter.Image = ia.ProcessedImage;
             ia.SaveProcessedImageToFile("processed-image.jpg");
         }
-
         private void addImage_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -93,18 +88,22 @@ namespace ImageProcessing
         private void pictureBoxBefore_MouseClick(object sender, MouseEventArgs e)
         {
             var clientSize = pictureBoxBefore.ClientSize;
+
             if (checkBoxLinearGradient.Checked)
             {
                 if (toogleClicks)
                 {
                     mouseClicks[0] = e.Location;
                     toogleClicks = false;
+                    Debug.WriteLine("Start: {0}", mouseClicks[0]);
                 }
                 else
                 {
                     mouseClicks[1] = e.Location;
                     toogleClicks = true;
+                    Debug.WriteLine("End: {0}", mouseClicks[1]);
                     ia.AddLinearGradient(mouseClicks[0], mouseClicks[1], clientSize);
+                    
                     UpdatePictureBoxAfter();
                 }
             }
