@@ -17,8 +17,10 @@ namespace ImageProcessing
     {
         ImageAdjustment ia;
         AlgorithmLbph al;
-        Bitmap ImageCompare1;
-        Bitmap ImageCompare2;
+        Bitmap ImageCompare1 = null;
+        Bitmap ImageCompare2 = null;
+        string CompareResult = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -231,7 +233,8 @@ namespace ImageProcessing
                     ShadesOfPart = 0;
                 }
             }
-            MessageBox.Show("\n\n\nSimilarity scale of images = " + SimilarityScale(Result, RowCount, ColCount).ToString() + "\nWhere 0 means that they are the same");
+            CompareResult = SimilarityScale(Result, RowCount, ColCount).ToString();
+            CompareOutput.Text = "Similarity scale of images = " + CompareResult + "\nWhere 0 means that they are the same";
             Debug.WriteLine("\n\n\nSimilarity scale of images = {0} \nWhere 0 means that they are the same", SimilarityScale(Result, RowCount, ColCount));
         }
 
@@ -321,6 +324,11 @@ namespace ImageProcessing
                 }
             }
             return Result;
+        }
+
+        private void CompareOutput_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
