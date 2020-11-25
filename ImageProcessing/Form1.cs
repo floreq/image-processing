@@ -21,6 +21,7 @@ namespace ImageProcessing
         Bitmap ImageCompare2 = null;
         string CompareResult = null;
         string NameOfSavedPicture = null;
+        string PathOfSavedPicture = null;
 
         public Form1()
         {
@@ -168,6 +169,10 @@ namespace ImageProcessing
             // zapisywanie obrazka
             // Dodac opcje zapisywania z nazwa
             ia.SaveProcessedImageToFile(NameOfSavedPicture);
+            var Cos = ia.ProcessedImage;
+            string pathstring = System.IO.Path.Combine(PathOfSavedPicture, NameOfSavedPicture);
+            Cos.Save(pathstring);
+            
         }
 
         private void AddImage3_Click(object sender, EventArgs e)
@@ -334,7 +339,21 @@ namespace ImageProcessing
 
         private void SaveName_TextChanged(object sender, EventArgs e)
         {
-            NameOfSavedPicture = SaveName.Text;
+            NameOfSavedPicture = SaveName.Text + ".jpg";
         }
+        private void SavePath_TextChanged(object sender, EventArgs e)
+        {
+            PathOfSavedPicture = SavePath.Text;
+        }
+
+        private void NameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void PathLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

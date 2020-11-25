@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.PathLabel = new System.Windows.Forms.Label();
+            this.NameLabel = new System.Windows.Forms.Label();
+            this.SaveName = new System.Windows.Forms.TextBox();
             this.CompareOutput = new System.Windows.Forms.Label();
             this.StartComparison = new System.Windows.Forms.Button();
             this.AddImage3 = new System.Windows.Forms.Button();
@@ -48,7 +51,7 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
-            this.SaveName = new System.Windows.Forms.TextBox();
+            this.SavePath = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -71,6 +74,9 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.SavePath);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathLabel);
+            this.splitContainerAplication.Panel1.Controls.Add(this.NameLabel);
             this.splitContainerAplication.Panel1.Controls.Add(this.SaveName);
             this.splitContainerAplication.Panel1.Controls.Add(this.CompareOutput);
             this.splitContainerAplication.Panel1.Controls.Add(this.StartComparison);
@@ -95,10 +101,38 @@
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
             // 
+            // PathLabel
+            // 
+            this.PathLabel.AutoSize = true;
+            this.PathLabel.Location = new System.Drawing.Point(12, 70);
+            this.PathLabel.Name = "PathLabel";
+            this.PathLabel.Size = new System.Drawing.Size(132, 15);
+            this.PathLabel.TabIndex = 17;
+            this.PathLabel.Text = "Path of new image save";
+            this.PathLabel.Click += new System.EventHandler(this.PathLabel_Click);
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.AutoSize = true;
+            this.NameLabel.Location = new System.Drawing.Point(12, 41);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(129, 15);
+            this.NameLabel.TabIndex = 16;
+            this.NameLabel.Text = "Name of image to save";
+            this.NameLabel.Click += new System.EventHandler(this.NameLabel_Click);
+            // 
+            // SaveName
+            // 
+            this.SaveName.Location = new System.Drawing.Point(147, 38);
+            this.SaveName.Name = "SaveName";
+            this.SaveName.Size = new System.Drawing.Size(202, 23);
+            this.SaveName.TabIndex = 14;
+            this.SaveName.TextChanged += new System.EventHandler(this.SaveName_TextChanged);
+            // 
             // CompareOutput
             // 
             this.CompareOutput.AutoSize = true;
-            this.CompareOutput.Location = new System.Drawing.Point(12, 235);
+            this.CompareOutput.Location = new System.Drawing.Point(14, 323);
             this.CompareOutput.Name = "CompareOutput";
             this.CompareOutput.Size = new System.Drawing.Size(0, 15);
             this.CompareOutput.TabIndex = 13;
@@ -107,7 +141,7 @@
             // StartComparison
             // 
             this.StartComparison.Enabled = false;
-            this.StartComparison.Location = new System.Drawing.Point(253, 195);
+            this.StartComparison.Location = new System.Drawing.Point(259, 282);
             this.StartComparison.Name = "StartComparison";
             this.StartComparison.Size = new System.Drawing.Size(43, 23);
             this.StartComparison.TabIndex = 12;
@@ -119,7 +153,7 @@
             // AddImage3
             // 
             this.AddImage3.Enabled = false;
-            this.AddImage3.Location = new System.Drawing.Point(83, 195);
+            this.AddImage3.Location = new System.Drawing.Point(94, 284);
             this.AddImage3.Name = "AddImage3";
             this.AddImage3.Size = new System.Drawing.Size(76, 23);
             this.AddImage3.TabIndex = 11;
@@ -129,7 +163,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(293, 3);
+            this.SaveButton.Location = new System.Drawing.Point(147, 96);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(76, 23);
             this.SaveButton.TabIndex = 10;
@@ -141,7 +175,7 @@
             // ImageComparison
             // 
             this.ImageComparison.AutoSize = true;
-            this.ImageComparison.Location = new System.Drawing.Point(9, 172);
+            this.ImageComparison.Location = new System.Drawing.Point(15, 259);
             this.ImageComparison.Name = "ImageComparison";
             this.ImageComparison.Size = new System.Drawing.Size(127, 19);
             this.ImageComparison.TabIndex = 9;
@@ -152,7 +186,7 @@
             // AddImage2
             // 
             this.AddImage2.Enabled = false;
-            this.AddImage2.Location = new System.Drawing.Point(3, 195);
+            this.AddImage2.Location = new System.Drawing.Point(14, 284);
             this.AddImage2.Name = "AddImage2";
             this.AddImage2.Size = new System.Drawing.Size(76, 23);
             this.AddImage2.TabIndex = 8;
@@ -163,7 +197,7 @@
             // buttonStartAlgorithmLbph
             // 
             this.buttonStartAlgorithmLbph.Enabled = false;
-            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(253, 97);
+            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(259, 227);
             this.buttonStartAlgorithmLbph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonStartAlgorithmLbph.Name = "buttonStartAlgorithmLbph";
             this.buttonStartAlgorithmLbph.Size = new System.Drawing.Size(43, 23);
@@ -176,7 +210,7 @@
             // numericUpDownRadius
             // 
             this.numericUpDownRadius.Enabled = false;
-            this.numericUpDownRadius.Location = new System.Drawing.Point(127, 98);
+            this.numericUpDownRadius.Location = new System.Drawing.Point(133, 228);
             this.numericUpDownRadius.Maximum = new decimal(new int[] {
             10,
             0,
@@ -201,7 +235,7 @@
             // 
             this.checkBoxAlgorithmLbph.AutoSize = true;
             this.checkBoxAlgorithmLbph.Enabled = false;
-            this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(9, 98);
+            this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(15, 228);
             this.checkBoxAlgorithmLbph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxAlgorithmLbph.Name = "checkBoxAlgorithmLbph";
             this.checkBoxAlgorithmLbph.Size = new System.Drawing.Size(112, 19);
@@ -214,7 +248,7 @@
             // 
             this.checkBoxLinearGradient.AutoSize = true;
             this.checkBoxLinearGradient.Enabled = false;
-            this.checkBoxLinearGradient.Location = new System.Drawing.Point(9, 76);
+            this.checkBoxLinearGradient.Location = new System.Drawing.Point(15, 206);
             this.checkBoxLinearGradient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxLinearGradient.Name = "checkBoxLinearGradient";
             this.checkBoxLinearGradient.Size = new System.Drawing.Size(106, 19);
@@ -225,7 +259,7 @@
             // numericUpDownContrast
             // 
             this.numericUpDownContrast.Enabled = false;
-            this.numericUpDownContrast.Location = new System.Drawing.Point(127, 54);
+            this.numericUpDownContrast.Location = new System.Drawing.Point(133, 184);
             this.numericUpDownContrast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDownContrast.Minimum = new decimal(new int[] {
             100,
@@ -242,7 +276,7 @@
             // 
             this.checkBoxAdjustContrast.AutoSize = true;
             this.checkBoxAdjustContrast.Enabled = false;
-            this.checkBoxAdjustContrast.Location = new System.Drawing.Point(9, 54);
+            this.checkBoxAdjustContrast.Location = new System.Drawing.Point(15, 184);
             this.checkBoxAdjustContrast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxAdjustContrast.Name = "checkBoxAdjustContrast";
             this.checkBoxAdjustContrast.Size = new System.Drawing.Size(108, 19);
@@ -255,7 +289,7 @@
             // 
             this.checkBoxGrayScale.AutoSize = true;
             this.checkBoxGrayScale.Enabled = false;
-            this.checkBoxGrayScale.Location = new System.Drawing.Point(9, 32);
+            this.checkBoxGrayScale.Location = new System.Drawing.Point(15, 162);
             this.checkBoxGrayScale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxGrayScale.Name = "checkBoxGrayScale";
             this.checkBoxGrayScale.Size = new System.Drawing.Size(80, 19);
@@ -266,7 +300,7 @@
             // 
             // addImage
             // 
-            this.addImage.Location = new System.Drawing.Point(3, 3);
+            this.addImage.Location = new System.Drawing.Point(12, 9);
             this.addImage.Name = "addImage";
             this.addImage.Size = new System.Drawing.Size(76, 23);
             this.addImage.TabIndex = 0;
@@ -335,13 +369,13 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
-            // SaveName
+            // SavePath
             // 
-            this.SaveName.Location = new System.Drawing.Point(85, 4);
-            this.SaveName.Name = "SaveName";
-            this.SaveName.Size = new System.Drawing.Size(202, 23);
-            this.SaveName.TabIndex = 14;
-            this.SaveName.TextChanged += new System.EventHandler(this.SaveName_TextChanged);
+            this.SavePath.Location = new System.Drawing.Point(147, 67);
+            this.SavePath.Name = "SavePath";
+            this.SavePath.Size = new System.Drawing.Size(202, 23);
+            this.SavePath.TabIndex = 18;
+            this.SavePath.TextChanged += new System.EventHandler(this.SavePath_TextChanged);
             // 
             // Form1
             // 
@@ -393,6 +427,9 @@
         private System.Windows.Forms.Button StartComparison;
         private System.Windows.Forms.Label CompareOutput;
         private System.Windows.Forms.TextBox SaveName;
+        private System.Windows.Forms.Label PathLabel;
+        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.TextBox SavePath;
     }
 }
 
