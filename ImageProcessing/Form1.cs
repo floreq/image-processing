@@ -166,8 +166,10 @@ namespace ImageProcessing
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            // zapis z ustaleniem tylko nazwy
+            //ia.SaveProcessedImageToFile(NameOfSavedPicture);
+
             // pobiera nazwe i sciezke z pol do wpisania
-            ia.SaveProcessedImageToFile(NameOfSavedPicture);
             var Cos = ia.ProcessedImage;
             string pathstring = System.IO.Path.Combine(PathOfSavedPicture, NameOfSavedPicture);
 
