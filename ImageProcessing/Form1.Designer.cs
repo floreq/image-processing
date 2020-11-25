@@ -48,6 +48,7 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
+            this.SaveName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.SaveName);
             this.splitContainerAplication.Panel1.Controls.Add(this.CompareOutput);
             this.splitContainerAplication.Panel1.Controls.Add(this.StartComparison);
             this.splitContainerAplication.Panel1.Controls.Add(this.AddImage3);
@@ -127,7 +129,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(83, 3);
+            this.SaveButton.Location = new System.Drawing.Point(293, 3);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(76, 23);
             this.SaveButton.TabIndex = 10;
@@ -333,6 +335,14 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
+            // SaveName
+            // 
+            this.SaveName.Location = new System.Drawing.Point(85, 4);
+            this.SaveName.Name = "SaveName";
+            this.SaveName.Size = new System.Drawing.Size(202, 23);
+            this.SaveName.TabIndex = 14;
+            this.SaveName.TextChanged += new System.EventHandler(this.SaveName_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -382,6 +392,7 @@
         private System.Windows.Forms.Button AddImage3;
         private System.Windows.Forms.Button StartComparison;
         private System.Windows.Forms.Label CompareOutput;
+        private System.Windows.Forms.TextBox SaveName;
     }
 }
 
