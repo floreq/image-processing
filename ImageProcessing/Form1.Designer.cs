@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.SavePath = new System.Windows.Forms.TextBox();
             this.PathLabel = new System.Windows.Forms.Label();
             this.NameLabel = new System.Windows.Forms.Label();
             this.SaveName = new System.Windows.Forms.TextBox();
@@ -51,7 +52,6 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
-            this.SavePath = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -70,6 +70,7 @@
             // 
             this.splitContainerAplication.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerAplication.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerAplication.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerAplication.Name = "splitContainerAplication";
             // 
             // splitContainerAplication.Panel1
@@ -96,17 +97,27 @@
             // splitContainerAplication.Panel2
             // 
             this.splitContainerAplication.Panel2.Controls.Add(this.splitContainerImages);
-            this.splitContainerAplication.Size = new System.Drawing.Size(1121, 619);
-            this.splitContainerAplication.SplitterDistance = 372;
+            this.splitContainerAplication.Size = new System.Drawing.Size(1281, 825);
+            this.splitContainerAplication.SplitterDistance = 425;
+            this.splitContainerAplication.SplitterWidth = 5;
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
+            // 
+            // SavePath
+            // 
+            this.SavePath.Location = new System.Drawing.Point(185, 90);
+            this.SavePath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.SavePath.Name = "SavePath";
+            this.SavePath.Size = new System.Drawing.Size(230, 27);
+            this.SavePath.TabIndex = 18;
+            this.SavePath.TextChanged += new System.EventHandler(this.SavePath_TextChanged);
             // 
             // PathLabel
             // 
             this.PathLabel.AutoSize = true;
-            this.PathLabel.Location = new System.Drawing.Point(12, 70);
+            this.PathLabel.Location = new System.Drawing.Point(14, 93);
             this.PathLabel.Name = "PathLabel";
-            this.PathLabel.Size = new System.Drawing.Size(132, 15);
+            this.PathLabel.Size = new System.Drawing.Size(165, 20);
             this.PathLabel.TabIndex = 17;
             this.PathLabel.Text = "Path of new image save";
             this.PathLabel.Click += new System.EventHandler(this.PathLabel_Click);
@@ -114,36 +125,38 @@
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(12, 41);
+            this.NameLabel.Location = new System.Drawing.Point(14, 55);
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(129, 15);
+            this.NameLabel.Size = new System.Drawing.Size(164, 20);
             this.NameLabel.TabIndex = 16;
             this.NameLabel.Text = "Name of image to save";
             this.NameLabel.Click += new System.EventHandler(this.NameLabel_Click);
             // 
             // SaveName
             // 
-            this.SaveName.Location = new System.Drawing.Point(147, 38);
+            this.SaveName.Location = new System.Drawing.Point(185, 52);
+            this.SaveName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SaveName.Name = "SaveName";
-            this.SaveName.Size = new System.Drawing.Size(202, 23);
+            this.SaveName.Size = new System.Drawing.Size(230, 27);
             this.SaveName.TabIndex = 14;
             this.SaveName.TextChanged += new System.EventHandler(this.SaveName_TextChanged);
             // 
             // CompareOutput
             // 
             this.CompareOutput.AutoSize = true;
-            this.CompareOutput.Location = new System.Drawing.Point(14, 323);
+            this.CompareOutput.Location = new System.Drawing.Point(16, 431);
             this.CompareOutput.Name = "CompareOutput";
-            this.CompareOutput.Size = new System.Drawing.Size(0, 15);
+            this.CompareOutput.Size = new System.Drawing.Size(0, 20);
             this.CompareOutput.TabIndex = 13;
             this.CompareOutput.Click += new System.EventHandler(this.CompareOutput_Click);
             // 
             // StartComparison
             // 
             this.StartComparison.Enabled = false;
-            this.StartComparison.Location = new System.Drawing.Point(259, 282);
+            this.StartComparison.Location = new System.Drawing.Point(296, 376);
+            this.StartComparison.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.StartComparison.Name = "StartComparison";
-            this.StartComparison.Size = new System.Drawing.Size(43, 23);
+            this.StartComparison.Size = new System.Drawing.Size(49, 31);
             this.StartComparison.TabIndex = 12;
             this.StartComparison.Text = "Start";
             this.StartComparison.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -153,9 +166,10 @@
             // AddImage3
             // 
             this.AddImage3.Enabled = false;
-            this.AddImage3.Location = new System.Drawing.Point(94, 284);
+            this.AddImage3.Location = new System.Drawing.Point(107, 379);
+            this.AddImage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddImage3.Name = "AddImage3";
-            this.AddImage3.Size = new System.Drawing.Size(76, 23);
+            this.AddImage3.Size = new System.Drawing.Size(87, 31);
             this.AddImage3.TabIndex = 11;
             this.AddImage3.Text = "Add Image";
             this.AddImage3.UseVisualStyleBackColor = true;
@@ -163,9 +177,10 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(147, 96);
+            this.SaveButton.Location = new System.Drawing.Point(185, 129);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(76, 23);
+            this.SaveButton.Size = new System.Drawing.Size(87, 31);
             this.SaveButton.TabIndex = 10;
             this.SaveButton.Text = "Save";
             this.SaveButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -175,9 +190,10 @@
             // ImageComparison
             // 
             this.ImageComparison.AutoSize = true;
-            this.ImageComparison.Location = new System.Drawing.Point(15, 259);
+            this.ImageComparison.Location = new System.Drawing.Point(17, 345);
+            this.ImageComparison.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ImageComparison.Name = "ImageComparison";
-            this.ImageComparison.Size = new System.Drawing.Size(127, 19);
+            this.ImageComparison.Size = new System.Drawing.Size(157, 24);
             this.ImageComparison.TabIndex = 9;
             this.ImageComparison.Text = "Image Comparison";
             this.ImageComparison.UseVisualStyleBackColor = true;
@@ -186,9 +202,10 @@
             // AddImage2
             // 
             this.AddImage2.Enabled = false;
-            this.AddImage2.Location = new System.Drawing.Point(14, 284);
+            this.AddImage2.Location = new System.Drawing.Point(16, 379);
+            this.AddImage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddImage2.Name = "AddImage2";
-            this.AddImage2.Size = new System.Drawing.Size(76, 23);
+            this.AddImage2.Size = new System.Drawing.Size(87, 31);
             this.AddImage2.TabIndex = 8;
             this.AddImage2.Text = "Add Image";
             this.AddImage2.UseVisualStyleBackColor = true;
@@ -197,10 +214,9 @@
             // buttonStartAlgorithmLbph
             // 
             this.buttonStartAlgorithmLbph.Enabled = false;
-            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(259, 227);
-            this.buttonStartAlgorithmLbph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStartAlgorithmLbph.Location = new System.Drawing.Point(296, 303);
             this.buttonStartAlgorithmLbph.Name = "buttonStartAlgorithmLbph";
-            this.buttonStartAlgorithmLbph.Size = new System.Drawing.Size(43, 23);
+            this.buttonStartAlgorithmLbph.Size = new System.Drawing.Size(49, 31);
             this.buttonStartAlgorithmLbph.TabIndex = 7;
             this.buttonStartAlgorithmLbph.Text = "Start";
             this.buttonStartAlgorithmLbph.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -210,7 +226,8 @@
             // numericUpDownRadius
             // 
             this.numericUpDownRadius.Enabled = false;
-            this.numericUpDownRadius.Location = new System.Drawing.Point(133, 228);
+            this.numericUpDownRadius.Location = new System.Drawing.Point(152, 304);
+            this.numericUpDownRadius.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numericUpDownRadius.Maximum = new decimal(new int[] {
             10,
             0,
@@ -222,7 +239,7 @@
             0,
             0});
             this.numericUpDownRadius.Name = "numericUpDownRadius";
-            this.numericUpDownRadius.Size = new System.Drawing.Size(120, 23);
+            this.numericUpDownRadius.Size = new System.Drawing.Size(137, 27);
             this.numericUpDownRadius.TabIndex = 6;
             this.numericUpDownRadius.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.numericUpDownRadius.Value = new decimal(new int[] {
@@ -235,10 +252,9 @@
             // 
             this.checkBoxAlgorithmLbph.AutoSize = true;
             this.checkBoxAlgorithmLbph.Enabled = false;
-            this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(15, 228);
-            this.checkBoxAlgorithmLbph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxAlgorithmLbph.Location = new System.Drawing.Point(17, 304);
             this.checkBoxAlgorithmLbph.Name = "checkBoxAlgorithmLbph";
-            this.checkBoxAlgorithmLbph.Size = new System.Drawing.Size(112, 19);
+            this.checkBoxAlgorithmLbph.Size = new System.Drawing.Size(137, 24);
             this.checkBoxAlgorithmLbph.TabIndex = 5;
             this.checkBoxAlgorithmLbph.Text = "Algorithm LBPH";
             this.checkBoxAlgorithmLbph.UseVisualStyleBackColor = true;
@@ -248,10 +264,9 @@
             // 
             this.checkBoxLinearGradient.AutoSize = true;
             this.checkBoxLinearGradient.Enabled = false;
-            this.checkBoxLinearGradient.Location = new System.Drawing.Point(15, 206);
-            this.checkBoxLinearGradient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxLinearGradient.Location = new System.Drawing.Point(17, 275);
             this.checkBoxLinearGradient.Name = "checkBoxLinearGradient";
-            this.checkBoxLinearGradient.Size = new System.Drawing.Size(106, 19);
+            this.checkBoxLinearGradient.Size = new System.Drawing.Size(132, 24);
             this.checkBoxLinearGradient.TabIndex = 4;
             this.checkBoxLinearGradient.Text = "Linear Gradient";
             this.checkBoxLinearGradient.UseVisualStyleBackColor = true;
@@ -259,15 +274,14 @@
             // numericUpDownContrast
             // 
             this.numericUpDownContrast.Enabled = false;
-            this.numericUpDownContrast.Location = new System.Drawing.Point(133, 184);
-            this.numericUpDownContrast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numericUpDownContrast.Location = new System.Drawing.Point(152, 245);
             this.numericUpDownContrast.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.numericUpDownContrast.Name = "numericUpDownContrast";
-            this.numericUpDownContrast.Size = new System.Drawing.Size(120, 23);
+            this.numericUpDownContrast.Size = new System.Drawing.Size(137, 27);
             this.numericUpDownContrast.TabIndex = 3;
             this.numericUpDownContrast.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.numericUpDownContrast.ValueChanged += new System.EventHandler(this.numericUpDownContrast_ValueChanged);
@@ -276,10 +290,9 @@
             // 
             this.checkBoxAdjustContrast.AutoSize = true;
             this.checkBoxAdjustContrast.Enabled = false;
-            this.checkBoxAdjustContrast.Location = new System.Drawing.Point(15, 184);
-            this.checkBoxAdjustContrast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxAdjustContrast.Location = new System.Drawing.Point(17, 245);
             this.checkBoxAdjustContrast.Name = "checkBoxAdjustContrast";
-            this.checkBoxAdjustContrast.Size = new System.Drawing.Size(108, 19);
+            this.checkBoxAdjustContrast.Size = new System.Drawing.Size(132, 24);
             this.checkBoxAdjustContrast.TabIndex = 2;
             this.checkBoxAdjustContrast.Text = "Adjust Contrast";
             this.checkBoxAdjustContrast.UseVisualStyleBackColor = true;
@@ -289,10 +302,9 @@
             // 
             this.checkBoxGrayScale.AutoSize = true;
             this.checkBoxGrayScale.Enabled = false;
-            this.checkBoxGrayScale.Location = new System.Drawing.Point(15, 162);
-            this.checkBoxGrayScale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxGrayScale.Location = new System.Drawing.Point(17, 216);
             this.checkBoxGrayScale.Name = "checkBoxGrayScale";
-            this.checkBoxGrayScale.Size = new System.Drawing.Size(80, 19);
+            this.checkBoxGrayScale.Size = new System.Drawing.Size(100, 24);
             this.checkBoxGrayScale.TabIndex = 1;
             this.checkBoxGrayScale.Text = "Gray Scale";
             this.checkBoxGrayScale.UseVisualStyleBackColor = true;
@@ -300,9 +312,10 @@
             // 
             // addImage
             // 
-            this.addImage.Location = new System.Drawing.Point(12, 9);
+            this.addImage.Location = new System.Drawing.Point(14, 12);
+            this.addImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addImage.Name = "addImage";
-            this.addImage.Size = new System.Drawing.Size(76, 23);
+            this.addImage.Size = new System.Drawing.Size(87, 31);
             this.addImage.TabIndex = 0;
             this.addImage.Text = "Add Image";
             this.addImage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -313,6 +326,7 @@
             // 
             this.splitContainerImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerImages.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerImages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerImages.Name = "splitContainerImages";
             // 
             // splitContainerImages.Panel1
@@ -324,17 +338,18 @@
             // 
             this.splitContainerImages.Panel2.Controls.Add(this.labelAfter);
             this.splitContainerImages.Panel2.Controls.Add(this.pictureBoxAfter);
-            this.splitContainerImages.Size = new System.Drawing.Size(745, 619);
-            this.splitContainerImages.SplitterDistance = 246;
+            this.splitContainerImages.Size = new System.Drawing.Size(851, 825);
+            this.splitContainerImages.SplitterDistance = 281;
+            this.splitContainerImages.SplitterWidth = 5;
             this.splitContainerImages.TabIndex = 0;
             this.splitContainerImages.Text = "splitContainer2";
             // 
             // labelBefore
             // 
             this.labelBefore.AutoSize = true;
-            this.labelBefore.Location = new System.Drawing.Point(3, 3);
+            this.labelBefore.Location = new System.Drawing.Point(3, 4);
             this.labelBefore.Name = "labelBefore";
-            this.labelBefore.Size = new System.Drawing.Size(41, 15);
+            this.labelBefore.Size = new System.Drawing.Size(53, 20);
             this.labelBefore.TabIndex = 0;
             this.labelBefore.Text = "Before";
             // 
@@ -343,8 +358,9 @@
             this.pictureBoxBefore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxBefore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxBefore.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxBefore.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxBefore.Name = "pictureBoxBefore";
-            this.pictureBoxBefore.Size = new System.Drawing.Size(246, 619);
+            this.pictureBoxBefore.Size = new System.Drawing.Size(281, 825);
             this.pictureBoxBefore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxBefore.TabIndex = 1;
             this.pictureBoxBefore.TabStop = false;
@@ -353,9 +369,9 @@
             // labelAfter
             // 
             this.labelAfter.AutoSize = true;
-            this.labelAfter.Location = new System.Drawing.Point(3, 3);
+            this.labelAfter.Location = new System.Drawing.Point(3, 4);
             this.labelAfter.Name = "labelAfter";
-            this.labelAfter.Size = new System.Drawing.Size(33, 15);
+            this.labelAfter.Size = new System.Drawing.Size(42, 20);
             this.labelAfter.TabIndex = 0;
             this.labelAfter.Text = "After";
             // 
@@ -363,26 +379,20 @@
             // 
             this.pictureBoxAfter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxAfter.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxAfter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxAfter.Name = "pictureBoxAfter";
-            this.pictureBoxAfter.Size = new System.Drawing.Size(495, 619);
+            this.pictureBoxAfter.Size = new System.Drawing.Size(565, 825);
             this.pictureBoxAfter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
-            // SavePath
-            // 
-            this.SavePath.Location = new System.Drawing.Point(147, 67);
-            this.SavePath.Name = "SavePath";
-            this.SavePath.Size = new System.Drawing.Size(202, 23);
-            this.SavePath.TabIndex = 18;
-            this.SavePath.TextChanged += new System.EventHandler(this.SavePath_TextChanged);
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 619);
+            this.ClientSize = new System.Drawing.Size(1281, 825);
             this.Controls.Add(this.splitContainerAplication);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Process Image";
             this.splitContainerAplication.Panel1.ResumeLayout(false);
