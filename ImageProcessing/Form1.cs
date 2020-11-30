@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ImageProcessing.Model;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace ImageProcessing
 {
@@ -102,15 +103,20 @@ namespace ImageProcessing
                 {
                     mouseClicks[0] = e.Location;
                     toogleClicks = false;
-                    Debug.WriteLine("Start: {0}", mouseClicks[0]);
                 }
                 else
                 {
                     mouseClicks[1] = e.Location;
                     toogleClicks = true;
-                    Debug.WriteLine("End: {0}", mouseClicks[1]);
+
+                    using (Graphics g = pictureBoxBefore.CreateGraphics())
+                    {
+                        Pen p = new Pen(Color.Red, 2);
+
+                        g.DrawLine(p, mouseClicks[0], mouseClicks[1]);
+                    }
+
                     ia.AddLinearGradient(mouseClicks[0], mouseClicks[1], clientSize);
-                    
                     UpdatePictureBoxAfter();
                 }
             }
@@ -122,7 +128,8 @@ namespace ImageProcessing
             {
                 numericUpDownRadius.Enabled = true;
                 buttonStartAlgorithmLbph.Enabled = true;
-            } else
+            }
+            else
             {
                 numericUpDownRadius.Enabled = false;
                 buttonStartAlgorithmLbph.Enabled = false;
@@ -175,7 +182,7 @@ namespace ImageProcessing
 
             // zapisywanie obrazka
             Cos.Save(pathstring);
-            
+
         }
 
         private void AddImage3_Click(object sender, EventArgs e)

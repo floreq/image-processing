@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -104,68 +105,23 @@ namespace ImageProcessing.Model
             double scaleForX = Convert.ToDouble(image.Width) / Convert.ToDouble(relativeSize.Width);
             double scaleForY = Convert.ToDouble(image.Height) / Convert.ToDouble(relativeImageHeight);
 
-            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            IntPtr scan0 = imageData.Scan0; // First pixel adress
+            int x1 = Convert.ToInt32(start.X * scaleForX);
+            int y1 = Convert.ToInt32((start.Y - deltaY) * scaleForY);
+            int x2 = Convert.ToInt32(end.X * scaleForX);
+            int y2 = Convert.ToInt32((end.Y - deltaY) * scaleForY);
 
-            // Image colors (BGR not RGB)
-            byte[] imageDataBytes = new byte[Math.Abs(imageData.Stride) * imageData.Height];
-            var imageDataBytesLenght = imageDataBytes.Length;
-            var imageDataBytesWidth = Math.Abs(imageData.Stride);
-
-            Marshal.Copy(scan0, imageDataBytes, 0, imageDataBytesLenght);
-
-            int width = 3;
-            int height = 0;
-
-            double x1 = start.X * scaleForX; 
-            double y1 = (start.Y - deltaY) * scaleForY;
-            double x2 = end.X * scaleForX; 
-            double y2 = (end.Y - deltaY) * scaleForY; 
-
-            double a = (y2 - y1) / (x2 - x1);
-            double b = y1 - a * x1;
-
-            double gradientWidthLimit = Math.Abs((height - b) / a) * bytesPerPixel;
-            double gradientHeightLimit = (end.Y - deltaY) * scaleForY;
-
-            if (start.X == end.X)
+            using (Graphics g = Graphics.FromImage(image))
             {
+                LinearGradientBrush linGrBrush = new LinearGradientBrush(
+                   new Point(x1, y1),
+                   new Point(x2, y2),
+                   Color.FromArgb(0, 0, 0, 0),
+                   Color.FromArgb(255, 0, 0, 0)
+                );
+
+                Pen pen = new Pen(linGrBrush, (image.Width + image.Height) * 2);
+                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
             }
-            //if (start.Y == end.Y)
-            //{
-            //}
-
-            int i = 3;
-            while (i < imageDataBytesLenght)
-            {
-                byte pixelB = imageDataBytes[i - 3];
-                byte pixelR = imageDataBytes[i - 1];
-                byte pixelG = imageDataBytes[i - 2];
-
-                imageDataBytes[i - 3] = 255;
-                imageDataBytes[i - 1] = 0;
-                imageDataBytes[i - 2] = 0;
-
-                if (width >= gradientWidthLimit)
-                {
-                    i += imageDataBytesWidth - width;
-                    width = 0;
-                    gradientWidthLimit = Math.Abs((height - b) / a) * bytesPerPixel;
-
-                    height++;
-                    if (height >= gradientHeightLimit)
-                    {
-                        break;
-                    }
-
-                    continue;
-                }
-                i += bytesPerPixel;
-                width += bytesPerPixel;
-            }
-
-            Marshal.Copy(imageDataBytes, 0, scan0, imageDataBytesLenght);
-            image.UnlockBits(imageData);
 
             return this;
         }
