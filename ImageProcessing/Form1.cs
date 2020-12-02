@@ -36,6 +36,7 @@ namespace ImageProcessing
             checkBoxAdjustContrast.Enabled = isEnable;
             checkBoxLinearGradient.Enabled = isEnable;
             checkBoxAlgorithmLbph.Enabled = isEnable;
+            checkBoxGammaCorection.Enabled = isEnable;
         }
 
         private void UpdatePictureBoxAfter()
@@ -365,5 +366,24 @@ namespace ImageProcessing
 
         }
 
+        private void checkBoxGammaCorection_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxGammaCorection.Checked)
+            {
+                numericUpDownGamma.Enabled = true;
+            }
+            else
+            {
+                numericUpDownGamma.Enabled = false;
+            }
+        }
+
+        private void numericUpDownGamma_ValueChanged(object sender, EventArgs e)
+        {
+            double gammaValue = Convert.ToDouble(numericUpDownGamma.Value);
+            ia.GammaCorrection(gammaValue);
+
+            UpdatePictureBoxAfter();
+        }
     }
 }

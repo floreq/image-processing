@@ -125,5 +125,61 @@ namespace ImageProcessing.Model
 
             return this;
         }
+        public ImageAfter GammaCorrection(double gamma)
+        {
+            var image = ProcessedImage;
+
+            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            IntPtr scan0 = imageData.Scan0; // First pixel adress
+
+            // Image colors (BGR not RGB)
+            byte[] imageDataBytes = new byte[Math.Abs(imageData.Stride) * imageData.Height];
+            var imageDataBytesLenght = imageDataBytes.Length;
+            var imageDataBytesWidth = Math.Abs(imageData.Stride);
+
+            Marshal.Copy(scan0, imageDataBytes, 0, imageDataBytesLenght);
+
+            double gammaCorrection = 1.0 / gamma;
+
+            int width = 3;
+            int i = 3;
+            while (i < imageDataBytesLenght)
+            {
+                byte pixelB = imageDataBytes[i - 3];
+                byte pixelR = imageDataBytes[i - 1];
+                byte pixelG = imageDataBytes[i - 2];
+
+                var newCorrectedPixelB = 255 * Math.Pow((pixelB / 255.0), gammaCorrection);
+                var newCorrectedPixelR = 255 * Math.Pow((pixelR / 255.0), gammaCorrection);
+                var newCorrectedPixelG = 255 * Math.Pow((pixelG / 255.0), gammaCorrection);
+
+                if (newCorrectedPixelB > 255) imageDataBytes[i - 3] = 255;
+                else if (newCorrectedPixelB < 0) imageDataBytes[i - 3] = 0;
+                else imageDataBytes[i - 3] = Convert.ToByte(newCorrectedPixelB);
+
+                if (newCorrectedPixelR > 255) imageDataBytes[i - 1] = 255;
+                else if (newCorrectedPixelR < 0) imageDataBytes[i - 1] = 0;
+                else imageDataBytes[i - 1] = Convert.ToByte(newCorrectedPixelR);
+
+                if (newCorrectedPixelG > 255) imageDataBytes[i - 2] = 255;
+                else if (newCorrectedPixelG < 0) imageDataBytes[i - 2] = 0;
+                else imageDataBytes[i - 2] = Convert.ToByte(newCorrectedPixelG);
+
+
+                if (width >= imageDataBytesWidth)
+                {
+                    i += imageDataBytesWidth - width;
+                    width = 0;
+                    continue;
+                }
+                i += bytesPerPixel;
+                width += bytesPerPixel;
+            }
+
+            Marshal.Copy(imageDataBytes, 0, scan0, imageDataBytesLenght);
+            image.UnlockBits(imageData);
+
+            return this;
+        }
     }
 }
