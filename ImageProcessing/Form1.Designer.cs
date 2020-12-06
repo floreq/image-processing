@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.PathWhereToSavePictures = new System.Windows.Forms.Label();
+            this.PathToFolderWithPictures = new System.Windows.Forms.Label();
+            this.PathToSaveImages = new System.Windows.Forms.TextBox();
+            this.PathOfFolder = new System.Windows.Forms.TextBox();
             this.numericUpDownGamma = new System.Windows.Forms.NumericUpDown();
             this.checkBoxGammaCorection = new System.Windows.Forms.CheckBox();
             this.SavePath = new System.Windows.Forms.TextBox();
@@ -54,6 +58,7 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
+            this.ConvertEveryPicture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -77,6 +82,11 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.ConvertEveryPicture);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathWhereToSavePictures);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathToFolderWithPictures);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathToSaveImages);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathOfFolder);
             this.splitContainerAplication.Panel1.Controls.Add(this.numericUpDownGamma);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxGammaCorection);
             this.splitContainerAplication.Panel1.Controls.Add(this.SavePath);
@@ -105,6 +115,40 @@
             this.splitContainerAplication.SplitterDistance = 371;
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
+            // 
+            // PathWhereToSavePictures
+            // 
+            this.PathWhereToSavePictures.AutoSize = true;
+            this.PathWhereToSavePictures.Location = new System.Drawing.Point(12, 454);
+            this.PathWhereToSavePictures.Name = "PathWhereToSavePictures";
+            this.PathWhereToSavePictures.Size = new System.Drawing.Size(116, 15);
+            this.PathWhereToSavePictures.TabIndex = 25;
+            this.PathWhereToSavePictures.Text = "Path to empty folder";
+            // 
+            // PathToFolderWithPictures
+            // 
+            this.PathToFolderWithPictures.AutoSize = true;
+            this.PathToFolderWithPictures.Location = new System.Drawing.Point(12, 425);
+            this.PathToFolderWithPictures.Name = "PathToFolderWithPictures";
+            this.PathToFolderWithPictures.Size = new System.Drawing.Size(90, 15);
+            this.PathToFolderWithPictures.TabIndex = 24;
+            this.PathToFolderWithPictures.Text = "Path to pictures";
+            // 
+            // PathToSaveImages
+            // 
+            this.PathToSaveImages.Location = new System.Drawing.Point(162, 451);
+            this.PathToSaveImages.Name = "PathToSaveImages";
+            this.PathToSaveImages.Size = new System.Drawing.Size(202, 23);
+            this.PathToSaveImages.TabIndex = 23;
+            this.PathToSaveImages.TextChanged += new System.EventHandler(this.PathToSaveImages_TextChanged);
+            // 
+            // PathOfFolder
+            // 
+            this.PathOfFolder.Location = new System.Drawing.Point(162, 422);
+            this.PathOfFolder.Name = "PathOfFolder";
+            this.PathOfFolder.Size = new System.Drawing.Size(202, 23);
+            this.PathOfFolder.TabIndex = 22;
+            this.PathOfFolder.TextChanged += new System.EventHandler(this.PathOfFolder_TextChanged);
             // 
             // numericUpDownGamma
             // 
@@ -425,6 +469,18 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
+            // ConvertEveryPicture
+            // 
+            this.ConvertEveryPicture.Enabled = false;
+            this.ConvertEveryPicture.Location = new System.Drawing.Point(162, 480);
+            this.ConvertEveryPicture.Name = "ConvertEveryPicture";
+            this.ConvertEveryPicture.Size = new System.Drawing.Size(76, 23);
+            this.ConvertEveryPicture.TabIndex = 26;
+            this.ConvertEveryPicture.Text = "Convert all";
+            this.ConvertEveryPicture.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ConvertEveryPicture.UseVisualStyleBackColor = true;
+            this.ConvertEveryPicture.Click += new System.EventHandler(this.ConvertEveryPicture_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,6 +538,11 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.CheckBox checkBoxGammaCorection;
         private System.Windows.Forms.NumericUpDown numericUpDownGamma;
+        private System.Windows.Forms.TextBox PathOfFolder;
+        private System.Windows.Forms.TextBox PathToSaveImages;
+        private System.Windows.Forms.Label PathWhereToSavePictures;
+        private System.Windows.Forms.Label PathToFolderWithPictures;
+        private System.Windows.Forms.Button ConvertEveryPicture;
     }
 }
 

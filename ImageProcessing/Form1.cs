@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using ImageProcessing.Model;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace ImageProcessing
 {
@@ -23,6 +24,8 @@ namespace ImageProcessing
         string CompareResult = null;
         string NameOfSavedPicture = null;
         string PathOfSavedPicture = null;
+        string PathToLoadFolder = null;
+        string PathForImages = null;
 
         public Form1()
         {
@@ -174,16 +177,7 @@ namespace ImageProcessing
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            // zapis z ustaleniem tylko nazwy
-            //ia.SaveProcessedImageToFile(NameOfSavedPicture);
-
-            // pobiera nazwe i sciezke z pol do wpisania
-            var Cos = ia.ProcessedImage;
-            string pathstring = System.IO.Path.Combine(PathOfSavedPicture, NameOfSavedPicture);
-
-            // zapisywanie obrazka
-            Cos.Save(pathstring);
-
+            SavePicture(ia.ProcessedImage, NameOfSavedPicture, PathOfSavedPicture);
         }
 
         private void AddImage3_Click(object sender, EventArgs e)
@@ -384,6 +378,93 @@ namespace ImageProcessing
             ia.GammaCorrection(gammaValue);
 
             UpdatePictureBoxAfter();
+        }
+
+        private void AddFolder_Click(object sender, EventArgs e)
+        {
+            var SelectedFolder = Directory.GetFiles(PathToLoadFolder);
+            string NameWithExtension;
+            var PictureNameCounter = 1;
+
+            // Debug to delete
+            Debug.WriteLine(SelectedFolder.ToString());
+
+            foreach (var Item in SelectedFolder)
+            {
+                AlgorithmLbph Current = new AlgorithmLbph();
+                Image test = Bitmap.FromFile(Item);
+                Current.ProcessedImage = (Bitmap)test;
+                NameWithExtension = PictureNameCounter.ToString() + ".jpg";
+
+                Current.Lbph(5).SaveProcessedImageToFile(NameWithExtension, PathForImages);
+                PictureNameCounter += 1;
+            }
+        }
+
+        private void PathOfFolder_TextChanged(object sender, EventArgs e)
+        {
+            PathToLoadFolder = PathOfFolder.Text;
+
+            EnableProcessingFolder();
+        }
+
+        private void PathToSaveImages_TextChanged(object sender, EventArgs e)
+        {
+            PathForImages = PathToSaveImages.Text;
+
+            EnableProcessingFolder();
+        }
+
+        private void EnableProcessingFolder()
+        {
+            if (PathToSaveImages.Text.Length > 0 && PathOfFolder.Text.Length > 0)
+            {
+                ConvertEveryPicture.Enabled = true;
+            }
+            if (PathToSaveImages.Text.Length == 0 || PathOfFolder.Text.Length == 0)
+            {
+                ConvertEveryPicture.Enabled = false;
+            }
+        }
+
+        public void SavePicture(Bitmap ImageToSave, string NameToSave, string PathToSave)
+        {
+            // zapis z ustaleniem tylko nazwy
+            if (PathOfSavedPicture.Length == 0)
+            {
+                ImageToSave.Save(NameToSave);
+            }
+            else
+            {
+                // pobiera nazwe i sciezke z pol do wpisania
+                var ToSave = ia.ProcessedImage;
+                string pathstring = System.IO.Path.Combine(PathToSave, NameToSave);
+
+                // zapisywanie obrazka
+                ToSave.Save(pathstring);
+            }
+        }
+
+        private void ConvertEveryPicture_Click(object sender, EventArgs e)
+        {
+
+            var SelectedFolder = Directory.GetFiles(PathToLoadFolder);
+            string NameWithExtension;
+            var PictureNameCounter = 1;
+
+            // Debug to delete
+            Debug.WriteLine(SelectedFolder.ToString());
+
+            foreach (var Item in SelectedFolder)
+            {
+                AlgorithmLbph Current = new AlgorithmLbph();
+                Image OpenedPicture = Bitmap.FromFile(Item);
+                Current.ProcessedImage = (Bitmap)OpenedPicture;
+                NameWithExtension = PictureNameCounter.ToString() + ".jpg";
+
+                Current.Lbph(5).SaveProcessedImageToFile(NameWithExtension, PathForImages);
+                PictureNameCounter += 1;
+            }
         }
     }
 }
