@@ -26,6 +26,7 @@ namespace ImageProcessing
         string PathOfSavedPicture = null;
         string PathToLoadFolder = null;
         string PathForImages = null;
+        string PathForCSV = null;
 
         public Form1()
         {
@@ -452,9 +453,6 @@ namespace ImageProcessing
             string NameWithExtension;
             var PictureNameCounter = 1;
 
-            // Debug to delete
-            Debug.WriteLine(SelectedFolder.ToString());
-
             foreach (var Item in SelectedFolder)
             {
                 AlgorithmLbph Current = new AlgorithmLbph();
@@ -464,6 +462,54 @@ namespace ImageProcessing
 
                 Current.Lbph(5).SaveProcessedImageToFile(NameWithExtension, PathForImages);
                 PictureNameCounter += 1;
+            }
+        }
+
+        private void PathWhereToSavePictures_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainerAplication_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PathToCSV_TextChanged(object sender, EventArgs e)
+        {
+            PathForCSV = PathToCSV.Text;
+        }
+
+        private void CompareAndSaveResults_Click(object sender, EventArgs e)
+        {
+            var SelectedFolder = Directory.GetFiles(PathToLoadFolder);
+            int Files = SelectedFolder.Length;
+            ImageWithShades[] Results = new ImageWithShades[Files];
+            int[] Shades;
+            string Name;
+            int Index;
+
+            for (int i = 0; i < Files; i++)
+            {
+                Results[i] = new ImageWithShades();
+            }
+            foreach (var Item in SelectedFolder)
+            {
+                Name = Item.Substring(PathToLoadFolder.Length + 1, Item.Length - PathToLoadFolder.Length - 5);
+                Index = Int32.Parse(Name) - 1;
+                Results[Index].Bitmapa = (Bitmap)Bitmap.FromFile(Item);               
+                HistogramValues(Results[Index].Bitmapa, out Shades);
+                Results[Index].SetGrayScale(Shades);
+                Results[Index].Name = Name;
+            }
+
+            for (int i = 0; i < Files; i++)
+            {
+                Debug.WriteLine(Results[i].Name);
+                
+                // Mial byc zapis do pliku tekstowego ale to sie minie z celem w ten sposob. To nie sa przeciez int tylko int[]
+                // Do jednej komorki excel nie wejdzie. Trzeba porownanie wszystkich zrobic w programie, a zapisac wyniki tylko
+                // Wyliczenie w Excelu bedzie tylko utrudnieniem
             }
         }
     }

@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.splitContainerAplication = new System.Windows.Forms.SplitContainer();
+            this.CompareAndSaveResults = new System.Windows.Forms.Button();
+            this.PathToResults = new System.Windows.Forms.Label();
+            this.PathToCSV = new System.Windows.Forms.TextBox();
+            this.ConvertEveryPicture = new System.Windows.Forms.Button();
             this.PathWhereToSavePictures = new System.Windows.Forms.Label();
             this.PathToFolderWithPictures = new System.Windows.Forms.Label();
             this.PathToSaveImages = new System.Windows.Forms.TextBox();
@@ -58,7 +62,6 @@
             this.pictureBoxBefore = new System.Windows.Forms.PictureBox();
             this.labelAfter = new System.Windows.Forms.Label();
             this.pictureBoxAfter = new System.Windows.Forms.PictureBox();
-            this.ConvertEveryPicture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerAplication)).BeginInit();
             this.splitContainerAplication.Panel1.SuspendLayout();
             this.splitContainerAplication.Panel2.SuspendLayout();
@@ -82,6 +85,9 @@
             // 
             // splitContainerAplication.Panel1
             // 
+            this.splitContainerAplication.Panel1.Controls.Add(this.CompareAndSaveResults);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathToResults);
+            this.splitContainerAplication.Panel1.Controls.Add(this.PathToCSV);
             this.splitContainerAplication.Panel1.Controls.Add(this.ConvertEveryPicture);
             this.splitContainerAplication.Panel1.Controls.Add(this.PathWhereToSavePictures);
             this.splitContainerAplication.Panel1.Controls.Add(this.PathToFolderWithPictures);
@@ -107,6 +113,7 @@
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxAdjustContrast);
             this.splitContainerAplication.Panel1.Controls.Add(this.checkBoxGrayScale);
             this.splitContainerAplication.Panel1.Controls.Add(this.addImage);
+            this.splitContainerAplication.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainerAplication_Panel1_Paint);
             // 
             // splitContainerAplication.Panel2
             // 
@@ -116,6 +123,46 @@
             this.splitContainerAplication.TabIndex = 0;
             this.splitContainerAplication.Text = "splitContainer1";
             // 
+            // CompareAndSaveResults
+            // 
+            this.CompareAndSaveResults.Location = new System.Drawing.Point(162, 554);
+            this.CompareAndSaveResults.Name = "CompareAndSaveResults";
+            this.CompareAndSaveResults.Size = new System.Drawing.Size(202, 23);
+            this.CompareAndSaveResults.TabIndex = 29;
+            this.CompareAndSaveResults.Text = "Compare and save";
+            this.CompareAndSaveResults.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.CompareAndSaveResults.UseVisualStyleBackColor = true;
+            this.CompareAndSaveResults.Click += new System.EventHandler(this.CompareAndSaveResults_Click);
+            // 
+            // PathToResults
+            // 
+            this.PathToResults.AutoSize = true;
+            this.PathToResults.Location = new System.Drawing.Point(15, 528);
+            this.PathToResults.Name = "PathToResults";
+            this.PathToResults.Size = new System.Drawing.Size(65, 15);
+            this.PathToResults.TabIndex = 28;
+            this.PathToResults.Text = "Path to csv";
+            // 
+            // PathToCSV
+            // 
+            this.PathToCSV.Location = new System.Drawing.Point(162, 525);
+            this.PathToCSV.Name = "PathToCSV";
+            this.PathToCSV.Size = new System.Drawing.Size(202, 23);
+            this.PathToCSV.TabIndex = 27;
+            this.PathToCSV.TextChanged += new System.EventHandler(this.PathToCSV_TextChanged);
+            // 
+            // ConvertEveryPicture
+            // 
+            this.ConvertEveryPicture.Enabled = false;
+            this.ConvertEveryPicture.Location = new System.Drawing.Point(162, 480);
+            this.ConvertEveryPicture.Name = "ConvertEveryPicture";
+            this.ConvertEveryPicture.Size = new System.Drawing.Size(76, 23);
+            this.ConvertEveryPicture.TabIndex = 26;
+            this.ConvertEveryPicture.Text = "Convert all";
+            this.ConvertEveryPicture.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ConvertEveryPicture.UseVisualStyleBackColor = true;
+            this.ConvertEveryPicture.Click += new System.EventHandler(this.ConvertEveryPicture_Click);
+            // 
             // PathWhereToSavePictures
             // 
             this.PathWhereToSavePictures.AutoSize = true;
@@ -124,6 +171,7 @@
             this.PathWhereToSavePictures.Size = new System.Drawing.Size(116, 15);
             this.PathWhereToSavePictures.TabIndex = 25;
             this.PathWhereToSavePictures.Text = "Path to empty folder";
+            this.PathWhereToSavePictures.Click += new System.EventHandler(this.PathWhereToSavePictures_Click);
             // 
             // PathToFolderWithPictures
             // 
@@ -469,18 +517,6 @@
             this.pictureBoxAfter.TabIndex = 1;
             this.pictureBoxAfter.TabStop = false;
             // 
-            // ConvertEveryPicture
-            // 
-            this.ConvertEveryPicture.Enabled = false;
-            this.ConvertEveryPicture.Location = new System.Drawing.Point(162, 480);
-            this.ConvertEveryPicture.Name = "ConvertEveryPicture";
-            this.ConvertEveryPicture.Size = new System.Drawing.Size(76, 23);
-            this.ConvertEveryPicture.TabIndex = 26;
-            this.ConvertEveryPicture.Text = "Convert all";
-            this.ConvertEveryPicture.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ConvertEveryPicture.UseVisualStyleBackColor = true;
-            this.ConvertEveryPicture.Click += new System.EventHandler(this.ConvertEveryPicture_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -543,6 +579,9 @@
         private System.Windows.Forms.Label PathWhereToSavePictures;
         private System.Windows.Forms.Label PathToFolderWithPictures;
         private System.Windows.Forms.Button ConvertEveryPicture;
+        private System.Windows.Forms.TextBox PathToCSV;
+        private System.Windows.Forms.Label PathToResults;
+        private System.Windows.Forms.Button CompareAndSaveResults;
     }
 }
 
