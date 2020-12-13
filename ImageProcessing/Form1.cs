@@ -497,7 +497,7 @@ namespace ImageProcessing
             {
                 Name = Item.Substring(PathToLoadFolder.Length + 1, Item.Length - PathToLoadFolder.Length - 5);
                 Index = Int32.Parse(Name) - 1;
-                Results[Index].Bitmapa = (Bitmap)Bitmap.FromFile(Item);               
+                Results[Index].Bitmapa = (Bitmap)Bitmap.FromFile(Item);
                 HistogramValues(Results[Index].Bitmapa, out Shades);
                 Results[Index].SetGrayScale(Shades);
                 Results[Index].Name = Name;
@@ -506,11 +506,49 @@ namespace ImageProcessing
             for (int i = 0; i < Files; i++)
             {
                 Debug.WriteLine(Results[i].Name);
-                
+
                 // Mial byc zapis do pliku tekstowego ale to sie minie z celem w ten sposob. To nie sa przeciez int tylko int[]
                 // Do jednej komorki excel nie wejdzie. Trzeba porownanie wszystkich zrobic w programie, a zapisac wyniki tylko
                 // Wyliczenie w Excelu bedzie tylko utrudnieniem
             }
+
+            int[,] CrossValidation = new int[Results.Length, Results.Length];
+            int[] Sum = new int[256];
+
+            for (int i = 0; i < Results.Length; i++)
+            {
+                for (int j = 0; j < Results.Length; j++)
+                {
+                    Sum = SimilarityOfTwoParts(Results[i].GrayScale, Results[j].GrayScale);
+                    for (int k = 0; k < 256; k++)
+                    {
+                        CrossValidation[i, j] += Sum[k];
+                    }
+                }
+            }
+
+            string Text;
+            Text = "Index\t";
+            File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
+            Text = null;
+            for (int i = 1; i <= Results.Length; i++)
+            {
+                Text += i.ToString() + ",\t";
+            }
+            Text += Environment.NewLine;
+            File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
+
+            for (int i = 0; i < Results.Length; i++)
+            {
+                Text = (i + 1).ToString() + ",\t";
+                for (int j = 0; j < Results.Length; j++)
+                {
+                    Text += CrossValidation[i, j] + ",\t";
+                }
+                Text += Environment.NewLine;
+                File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
+            }
+            Debug.WriteLine("Koniec");
         }
     }
 }
