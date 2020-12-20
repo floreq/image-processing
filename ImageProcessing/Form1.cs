@@ -236,7 +236,7 @@ namespace ImageProcessing
             {
                 for (int j = 0; j < ColCount; j++)
                 {
-                    for (int k = 0; k < 255; k++)
+                    for (int k = 0; k < 256; k++)
                     {
                         ShadesOfPart += Result[i, j][k];
                     }
@@ -484,46 +484,40 @@ namespace ImageProcessing
         {
             var SelectedFolder = Directory.GetFiles(PathToLoadFolder);
             int Files = SelectedFolder.Length;
-            ImageWithShades[] Results = new ImageWithShades[Files];
-            int[] Shades;
+            AdvancedSimilarity[] Results = new AdvancedSimilarity[Files];
             string Name;
             int Index;
+            int RowCount = 3;
+            int ColCount = 3;
 
             for (int i = 0; i < Files; i++)
             {
-                Results[i] = new ImageWithShades();
+                Results[i] = new AdvancedSimilarity(RowCount, ColCount);
             }
             foreach (var Item in SelectedFolder)
             {
                 Name = Item.Substring(PathToLoadFolder.Length + 1, Item.Length - PathToLoadFolder.Length - 5);
                 Index = Int32.Parse(Name) - 1;
-                Results[Index].Bitmapa = (Bitmap)Bitmap.FromFile(Item);
-                HistogramValues(Results[Index].Bitmapa, out Shades);
-                Results[Index].SetGrayScale(Shades);
+
                 Results[Index].Name = Name;
+                DividePicture((Bitmap)Bitmap.FromFile(Item), Results[Index].BitmapParts);
+                ArrayHistogramValues(Results[Index].BitmapParts, Results[Index].Shades, RowCount, ColCount);
             }
 
             for (int i = 0; i < Files; i++)
             {
                 Debug.WriteLine(Results[i].Name);
-
-                // Mial byc zapis do pliku tekstowego ale to sie minie z celem w ten sposob. To nie sa przeciez int tylko int[]
-                // Do jednej komorki excel nie wejdzie. Trzeba porownanie wszystkich zrobic w programie, a zapisac wyniki tylko
-                // Wyliczenie w Excelu bedzie tylko utrudnieniem
             }
 
             int[,] CrossValidation = new int[Results.Length, Results.Length];
-            int[] Sum = new int[256];
+            int[,][] Sum = new int[RowCount, ColCount][];
 
             for (int i = 0; i < Results.Length; i++)
             {
                 for (int j = 0; j < Results.Length; j++)
                 {
-                    Sum = SimilarityOfTwoParts(Results[i].GrayScale, Results[j].GrayScale);
-                    for (int k = 0; k < 256; k++)
-                    {
-                        CrossValidation[i, j] += Sum[k];
-                    }
+                    Sum = ComparePicturesShades(Results[i].Shades, Results[j].Shades, RowCount, ColCount);
+                    CrossValidation[i, j] = SimilarityScale(Sum, RowCount, ColCount);
                 }
             }
 
@@ -533,7 +527,7 @@ namespace ImageProcessing
             Text = null;
             for (int i = 1; i <= Results.Length; i++)
             {
-                Text += i.ToString() + ",\t";
+                Text += i.ToString() + ",\t\t";
             }
             Text += Environment.NewLine;
             File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
@@ -543,8 +537,13 @@ namespace ImageProcessing
                 Text = (i + 1).ToString() + ",\t";
                 for (int j = 0; j < Results.Length; j++)
                 {
-                    Text += CrossValidation[i, j] + ",\t";
+                    if (CrossValidation[i,j].ToString().Length < 7)
+                        Text += CrossValidation[i, j].ToString() + ",\t\t";
+
+                    else
+                        Text += CrossValidation[i, j].ToString() + ",\t";
                 }
+
                 Text += Environment.NewLine;
                 File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
             }
