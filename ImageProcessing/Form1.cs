@@ -12,6 +12,7 @@ using ImageProcessing.Model;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.IO;
+using ImageProcessor;
 
 namespace ImageProcessing
 {
@@ -27,6 +28,7 @@ namespace ImageProcessing
         string PathToLoadFolder = null;
         string PathForImages = null;
         string PathForCSV = null;
+        Size ScaleSize = new Size(275, 350);
 
         public Form1()
         {
@@ -421,10 +423,12 @@ namespace ImageProcessing
             if (PathToSaveImages.Text.Length > 0 && PathOfFolder.Text.Length > 0)
             {
                 ConvertEveryPicture.Enabled = true;
+                ScaleButton.Enabled = true;
             }
             if (PathToSaveImages.Text.Length == 0 || PathOfFolder.Text.Length == 0)
             {
                 ConvertEveryPicture.Enabled = false;
+                ScaleButton.Enabled = false;
             }
         }
 
@@ -548,6 +552,40 @@ namespace ImageProcessing
                 File.AppendAllText(PathForCSV, Text, Encoding.UTF8);
             }
             Debug.WriteLine("Koniec");
+        }
+
+
+        private void pictureBoxBefore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PathToResults_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        void Scale()
+        {
+            var SelectedFolder = Directory.GetFiles(PathToLoadFolder);
+            int NumberOfFiles = SelectedFolder.Length;
+            int NameCounter = 1;
+
+            foreach(var Item in SelectedFolder)
+            {
+                ImageFactory imageFactory = new ImageFactory();
+                imageFactory.Load(Item);
+                imageFactory.Resize(ScaleSize);
+                imageFactory.Save($@"{PathForImages}\{NameCounter}.jpg");
+                imageFactory.Dispose();
+                NameCounter++;
+            }
+
+        }
+
+        private void ScaleButton_Click_1(object sender, EventArgs e)
+        {
+            Scale();
         }
     }
 }
