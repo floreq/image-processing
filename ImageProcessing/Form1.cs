@@ -13,6 +13,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.IO;
 using ImageProcessor;
+using System.Collections;
 
 namespace ImageProcessing
 {
@@ -20,6 +21,7 @@ namespace ImageProcessing
     {
         ImageAdjustment ia;
         AlgorithmLbph al;
+        Bitmap imageAfter;
         Bitmap ImageCompare1 = null;
         Bitmap ImageCompare2 = null;
         string CompareResult = null;
@@ -57,7 +59,7 @@ namespace ImageProcessing
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap imageBefore = (Bitmap)Image.FromFile(ofd.FileName);
-                    Bitmap imageAfter = (Bitmap)Image.FromFile(ofd.FileName);
+                    imageAfter = (Bitmap)Image.FromFile(ofd.FileName);
                     pictureBoxBefore.Image = imageBefore;
                     pictureBoxAfter.Image = imageAfter;
 
@@ -586,6 +588,53 @@ namespace ImageProcessing
         private void ScaleButton_Click_1(object sender, EventArgs e)
         {
             Scale();
+        }
+
+        private void FaceRecognition_Click(object sender, EventArgs e)
+        {
+            var Dir = Directory.GetFiles(PathToLoadFolder).ToList<string>();
+
+            var Pictures = from Pic in Dir
+                       where Pic.Substring(Pic.Length - 3, 3) == "jpg"
+                       select Pic;
+
+            var Tab = new int[Pictures.Count()];
+            int RowCount = 3;
+            int ColCount = 3;
+            int counter = 0;
+            int? min = null;
+            string PersonRecognized = "Blad programu";
+
+            int[,][] Shades = new int[RowCount,ColCount][];
+            Bitmap[,] BitmapMatrix = new Bitmap[RowCount, ColCount];
+            DividePicture(imageAfter, BitmapMatrix);
+            ArrayHistogramValues(BitmapMatrix, Shades, RowCount, ColCount);
+
+
+            Bitmap bitmap;
+            AdvancedSimilarity[] Base = new AdvancedSimilarity[Pictures.Count()];
+
+            foreach (var item in Pictures)
+            {
+                bitmap = (Bitmap)Image.FromFile(item);
+                Base[counter] = new AdvancedSimilarity(RowCount, ColCount);
+                Base[counter].Name = item.Substring(PathToLoadFolder.Length + 1, item.Length - PathToLoadFolder.Length - 5);
+                DividePicture(bitmap, Base[counter].BitmapParts);
+                ArrayHistogramValues(Base[counter].BitmapParts, Base[counter].Shades, RowCount, ColCount);
+                var calc = ComparePicturesShades(Shades, Base[counter].Shades, RowCount, ColCount);
+                Tab[counter] = SimilarityScale(calc, RowCount, ColCount);
+                if (min == null)
+                    min = Tab[counter];
+                else if (Tab[counter] < min)
+                {
+                    min = Tab[counter];
+                    PersonRecognized = Base[counter].Name;
+                }
+                counter ++;
+            }
+
+            Debug.WriteLine($"Person from image {PersonRecognized} is recognised");
+
         }
     }
 }
