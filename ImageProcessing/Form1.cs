@@ -319,7 +319,8 @@ namespace ImageProcessing
                     Result[i, j] = new int[256];
                     for (int k = 0; k < 256; k++)
                     {
-                        Result[i, j][k] = (int)Math.Pow(First[i, j][k] - Second[i, j][k], 2);
+                        Result[i, j][k] = (int)Math.Abs(First[i, j][k] - Second[i, j][k]);
+                        /*Result[i, j][k] = (int)Math.Pow(First[i, j][k] - Second[i, j][k], 2);*/
                     }
                 }
             }
@@ -515,7 +516,7 @@ namespace ImageProcessing
                 Debug.WriteLine(Results[i].Name);
             }
 
-            int[,] CrossValidation = new int[Results.Length, Results.Length];
+            float[,] CrossValidation = new float[Results.Length, Results.Length];
             int[,][] Sum = new int[RowCount, ColCount][];
 
             for (int i = 0; i < Results.Length; i++)
@@ -523,7 +524,8 @@ namespace ImageProcessing
                 for (int j = 0; j < Results.Length; j++)
                 {
                     Sum = ComparePicturesShades(Results[i].Shades, Results[j].Shades, RowCount, ColCount);
-                    CrossValidation[i, j] = SimilarityScale(Sum, RowCount, ColCount);
+                    CrossValidation[i, j] = ((float)(SimilarityScale(Sum, RowCount, ColCount))/ 77760) * 100;        // hard coded 77760 (workes only with pic 320x243)
+                    /*CrossValidation[i, j] = SimilarityScale(Sum, RowCount, ColCount);*/
                 }
             }
 

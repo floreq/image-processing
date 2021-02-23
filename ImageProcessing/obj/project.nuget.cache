@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "jEJL615djTWOpPSevtFzaYsNYptw/REf5EMIjWpAu0hZzugBfHlNEaUMUHhlDyxYPOsjdeyizLCuNzngFF4B5Q==",
+  "dgSpecHash": "MfVXYenZUhitS4z0Qr8GFqJI5t0V3iaXqArgfsfISt7A0owaRe8V81dYjPxpY/fKlUrsdmHgQHDUg/n0DOdQuQ==",
   "success": true,
   "projectFilePath": "E:\\GitHub\\image-processing\\ImageProcessing\\ImageProcessing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Raviol\\.nuget\\packages\\imageprocessor\\2.9.1\\imageprocessor.2.9.1.nupkg.sha512",
     "C:\\Users\\Raviol\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Raviol\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\Raviol\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
+    "C:\\Users\\Raviol\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\Raviol\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Raviol\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.12\\microsoft.netcore.app.host.win-x64.3.1.12.nupkg.sha512"
   ],
   "logs": [
     {
